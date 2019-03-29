@@ -102,7 +102,7 @@ WORKDIR $USER_HOME
 # You may have to fiddle with the URLs a bit
 ENV TOR_DIST_MIRROR="https://www.torproject.org" \
     TBB_PATH="${USER_HOME}/tor_browser" \
-	TBB_VERSION="8.0.5" \
+	TBB_VERSION="8.0.7" \
 	GPG_KEYSERVER="sks-keyservers.net" \
 	TBB_KEYID="EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290"
 

@@ -1,0 +1,22 @@
+[package]
+name = "data_generator"
+version = "0.1.0"
+authors = ["Steven Sheffey"]
+edition = "2018"
+
+[dependencies]
+byteorder = "1"
+clap = "2"
+env_logger = "0.6"
+failure = "0.1"
+flate2 = "1.0"
+itertools = "0.8"
+log = "0.4"
+pnet_packet = "0.22"
+rayon = "1.0"
+serde = "1.0" 
+serde_derive = "1.0" 
+serde_json = "1.0"
+tempdir = "0.3"
+
+url_queue = { path = "../url_queue/url_queue" }

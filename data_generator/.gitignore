@@ -1,0 +1,6 @@
+/data/
+/target/
+*.swp
+*.rustfmt
+**/*.rs.bk
+Cargo.lock

@@ -1,0 +1,6 @@
+beautifulsoup4
+lxml
+requests[socks]
+selenium
+stem
+toml

@@ -1,0 +1,12 @@
+[package]
+name = "tcpdump_controller"
+version = "0.1.0"
+authors = ["Steven Sheffey <srs6p@mtmail.mtsu.edu>"]
+license = "GPL-3.0-or-later"
+publish = false
+
+[dependencies]
+byteorder = "1.2.7"
+env_logger = "0.5.13"
+log = "0.4.6"
+nix = "0.11"

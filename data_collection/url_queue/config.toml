@@ -1,0 +1,5 @@
+listen_addr = "0.0.0.0:3000"
+urls_path = "alexa-1m.csv"
+num_urls = 10000
+# num_urls = 10
+report_path = "/pcap_data/report.json"

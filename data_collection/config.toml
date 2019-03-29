@@ -1,0 +1,26 @@
+shuffle = false 
+seed = 1337
+work_types = [ "tor", "normal" ]
+
+log_level = "info"
+
+[tcpdump]
+filter = "port 443"
+
+[firefox]
+retries = 3
+wait_tag = "script"
+load_images = false
+clean_frequency = 100
+restart_frequency = 200
+[firefox.timeout]
+page = 5
+element = 55
+
+[tor]
+bridge = "meek 0.0.2.0:3 97700DFE9F483596DDA6264C4D7DF7641E1E39CE url=https://meek.azureedge.net/ front=ajax.aspnetcdn.com"
+port = 9050
+log_path = "/tmp/tor_error.log"
+[tor.timeout]
+initial = 600
+regular = 60

@@ -1,0 +1,22 @@
+[package]
+name = "url_queue"
+version = "0.1.0"
+authors = ["Steven Sheffey <srs6p@mtmail.mtsu.edu>"]
+license = "GPL-3.0-or-later"
+publish = false
+
+[dependencies]
+clap = "2"
+csv = "1.0"
+env_logger = "0.5"
+failure = "0.1"
+futures = "0.1.25"
+hex = "0.3"
+http = "0.1.9"
+hyper = "0.12.14"
+log = "0.4"
+rand = "0.5"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+toml = "0.4"

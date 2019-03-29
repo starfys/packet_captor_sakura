@@ -9,7 +9,8 @@ title = {TBA},
 booktitle = {TBA},
 month = {August},
 year = {2019}
-}```
+}
+```
 
 # Data Collection
 In the `data_collection` directory. This contains docker images and code to generate packet capture data for website navigation with and without tor, and with pluggable transports.

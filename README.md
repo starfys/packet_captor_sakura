@@ -3,12 +3,12 @@ This repository stores all the code used to produce results in "<title>"
 
 If this research is useful to your research, please cite our paper
 ```tex
-@InProceedings{Foobar2019,
-author = {Steven Sheffey},
-title = {TBA},
-booktitle = {TBA},
-month = {August},
-year = {2019}
+@InProceedings{sheffey2019improving,
+  author = {Steven Sheffey},
+  title = {Improving Meek With Adversarial Techniques},
+  booktitle = {TBA},
+  month = {August},
+  year = {2019}
 }
 ```
 

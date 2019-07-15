@@ -6,7 +6,7 @@ If this research is useful to your research, please cite our paper
 @InProceedings{sheffey2019improving,
   author = {Steven Sheffey},
   title = {Improving Meek With Adversarial Techniques},
-  booktitle = {TBA},
+  booktitle = {9th USENIX Workshop on Free and Open Communications on the Internet},
   month = {August},
   year = {2019}
 }

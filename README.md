@@ -3,12 +3,14 @@ This repository stores all the code used to produce results in "<title>"
 
 If this research is useful to your research, please cite our paper
 ```tex
-@InProceedings{sheffey2019improving,
-  author = {Sheffey, Steven and Aderholdt, Ferrol},
-  title = {Improving Meek With Adversarial Techniques},
-  booktitle = {9th USENIX Workshop on Free and Open Communications on the Internet},
-  month = {August},
-  year = {2019}
+@inproceedings {TODOFILLTHISIN,
+  author = {Steven Sheffey and Ferrol Aderholdt},
+  title = {mproving Meek With Adversarial Techniques},
+  booktitle = {9th {USENIX} Workshop on Free and Open Communications on the Internet ({FOCI} 19)},
+  year = {2019},
+  address = {Santa Clara, CA},
+  url = {https://www.usenix.org/conference/foci19/presentation/TODOFILLETHISIN},
+  publisher = {{USENIX} Association},
 }
 ```
 

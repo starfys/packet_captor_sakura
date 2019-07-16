@@ -15,7 +15,7 @@ If this research is useful to your research, please cite our paper
 ```
 
 # Data Collection
-In the `data_collection` directory. This contains docker images and code to generate packet capture data for website navigation with and without tor, and with pluggable transports.
+In the `data_collection` directory. This contains docker images and code to generate packet capture data for website navigation with and without Meek.
 
 # Feature Extraction
 In the `data_generator` directory. This contains code to extract useful features from the generated packet captures.

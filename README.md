@@ -1,11 +1,11 @@
 # About
-This repository stores all the code used to produce results in "<title>"
+This repository stores all the code used to produce results in "Improving Meek With Adversarial Techniques"
 
-If this research is useful to your research, please cite our paper
+If you find this repository useful to your research, please cite our paper
 ```tex
 @inproceedings {TODOFILLTHISIN,
   author = {Steven Sheffey and Ferrol Aderholdt},
-  title = {mproving Meek With Adversarial Techniques},
+  title = {Improving Meek With Adversarial Techniques},
   booktitle = {9th {USENIX} Workshop on Free and Open Communications on the Internet ({FOCI} 19)},
   year = {2019},
   address = {Santa Clara, CA},

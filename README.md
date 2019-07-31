@@ -3,13 +3,15 @@ This repository stores all the code used to produce results in "Improving Meek W
 
 If you find this repository useful to your research, please cite our paper
 ```tex
-@inproceedings {239064,
+  @inproceedings {239064,
+  author = {Steven Sheffey and Ferrol Aderholdt},
   title = {Improving Meek With Adversarial Techniques},
   booktitle = {9th {USENIX} Workshop on Free and Open Communications on the Internet ({FOCI} 19)},
   year = {2019},
   address = {Santa Clara, CA},
   url = {https://www.usenix.org/conference/foci19/presentation/sheffey},
   publisher = {{USENIX} Association},
+  month = aug,
 }
 ```
 

@@ -3,8 +3,8 @@ name: Data Generator
 on:
   push:
     paths:
-      - 'data_generator'
-      - 'data_collection/url_queue'
+      - 'data_generator/**'
+      - 'data_collection/url_queue/**'
 
 jobs:
   build_data_generator:

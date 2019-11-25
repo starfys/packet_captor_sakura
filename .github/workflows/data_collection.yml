@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Data Collection
 
 on:
   push:
@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Build the data collection docker image
+    - name: Build
       run: make build
       working-directory: data_collection

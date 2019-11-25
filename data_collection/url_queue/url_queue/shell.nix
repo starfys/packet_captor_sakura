@@ -17,5 +17,5 @@
 { pkgs ? import <nixpkgs> {} }:
   pkgs.mkShell {
     RUST_LOG="url_queue=debug";
-    buildInputs = [(pkgs.python3.withPackages (ps: with ps; [requests]))];
+    buildInputs = [(pkgs.python3.withPackages (ps: with ps; [requests])) pkgs.binutils.bintools];
 }

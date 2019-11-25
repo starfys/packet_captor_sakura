@@ -50,16 +50,3 @@ RUN cd tcpdump_controller && \
     cp target/release/tcpdump_controller ../bin/ && \
     cd .. && \
     rm -r tcpdump_controller
-
-# Set environment variables so logs are shown
-ENV RUST_LOG="tcpdump_controller=info"
-
-# Switch to root for copying over and running entry 
-USER root 
-
-# Copy over entrypoint script
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
-# Run entry point as root
-# Set up the entrypoint
-ENTRYPOINT ["./entrypoint.sh"]

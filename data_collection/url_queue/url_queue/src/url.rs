@@ -98,8 +98,7 @@ impl UrlsReaderBuilder {
             // Deserialize the records and take ownership
             .into_deserialize()
             // Flatten to remove errors
-            // TODO: change to `flatten` when that stabilizes
-            .flat_map(|entry| entry);
+            .flatten();
         // Add limit if given
         let csv_reader: UrlIterator = match self.limit {
             Some(limit) => Box::new(csv_reader.take(limit)),

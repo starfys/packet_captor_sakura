@@ -102,7 +102,7 @@ impl<'a> WorkQueueService<'a, CaptureWorkType, CaptureWork> {
             .flat_map(|url_entry| {
                 // Create work using both types
                 [CaptureWorkType::Normal, CaptureWorkType::Tor]
-                    .into_iter()
+                    .iter()
                     .cloned()
                     .map(move |work_type| {
                         let url_entry = url_entry.clone();

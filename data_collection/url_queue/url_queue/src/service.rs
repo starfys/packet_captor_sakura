@@ -185,11 +185,10 @@ impl<'a> WorkQueueService<'a, CaptureWorkType, CaptureWork> {
                     .map_err(as_io_error))
             .and_then(move |request: AddClientRequest<CaptureWorkType>| {
                 // Get a lock on the work queue
-                let result = work_queue
+                work_queue
                     .lock()
                     .map(|mut wq| wq.add_client(request.work_types))
-                    .map_err(|_| as_io_error("t"));
-                result
+                    .map_err(|_| as_io_error("t"))
             })
             // Create a response body
             .and_then(|client_id: u64| {
@@ -236,7 +235,7 @@ impl<'a> WorkQueueService<'a, CaptureWorkType, CaptureWork> {
             // Extract client ID and remove the client
             .and_then(move |request: RemoveClientRequest| {
                 // Remove the client
-                let response = work_queue
+                work_queue
                     // Get mutex lock on client
                     .lock()
                     // Remove client ID from client
@@ -245,8 +244,7 @@ impl<'a> WorkQueueService<'a, CaptureWorkType, CaptureWork> {
                         work_queue.num_clients()
                     })
                     // Convert error to io::Error
-                    .map_err(|_| as_io_error("failed to acquire mutex"));
-                response
+                    .map_err(|_| as_io_error("failed to acquire mutex"))
             })
             // Serialize a response body
             .and_then(move |num_clients: usize| {
@@ -293,7 +291,7 @@ impl<'a> WorkQueueService<'a, CaptureWorkType, CaptureWork> {
             // Get a lock on the work queue and request work
             .and_then(move |request: WorkRequest| {
                 // Lock the work queue mutex
-                let response = work_queue
+                work_queue
                     .lock()
                     // Request work
                     .map(|mut work_queue| {
@@ -302,8 +300,7 @@ impl<'a> WorkQueueService<'a, CaptureWorkType, CaptureWork> {
                             .ok_or_else(|| as_io_error("Failed to request work"))
                     })
                     // Convert error to io::Error
-                    .map_err(|_| as_io_error("failed to acquire mutex"));
-                response
+                    .map_err(|_| as_io_error("failed to acquire mutex"))
             })
             // Flatten the future
             .flatten()

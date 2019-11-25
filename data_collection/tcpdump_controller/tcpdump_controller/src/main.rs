@@ -13,12 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with tcpdump_controller.  If not, see <http://www.gnu.org/licenses/>.
-extern crate byteorder;
-extern crate env_logger;
-#[macro_use]
-extern crate log;
-extern crate nix;
-
 mod error;
 
 use std::fs;
@@ -28,6 +22,7 @@ use std::os::unix::net::{UnixListener, UnixStream};
 use std::process::{Child, Command, Stdio};
 
 use byteorder::{LittleEndian, ReadBytesExt};
+use log::{debug, error, info, warn};
 use nix::errno::Errno;
 use nix::sys::signal;
 use nix::unistd::Pid;
@@ -262,7 +257,8 @@ fn main() -> Result<(), TcpdumpError> {
     env_logger::init();
 
     // Set filename for socket
-    const SOCKET_FILENAME: &'static str = "/tmp/tcpdump.socket";
+    // TODO: have this stord in a config file, preferably one shared by the the thing communicating with it
+    const SOCKET_FILENAME: &str = "/tmp/tcpdump.socket";
 
     // Remove the socket file if it exists
     debug!("Removing old socket file");

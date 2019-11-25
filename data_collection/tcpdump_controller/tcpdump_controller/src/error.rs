@@ -73,13 +73,13 @@ impl fmt::Display for TcpdumpError {
                 RemoveSocketError(ref err) => format!("Error removing socket file: {}", err),
                 SocketMetadataError(ref err) => format!("Error accessing metadata: {}", err),
                 SocketIOError(ref err) => format!("Error communicating on socket: {}", err),
-                FilenameLengthError => format!("Error: Given filename length is too long"),
+                FilenameLengthError => "Error: Given filename length is too long".to_string(),
                 FilenameParseError(ref err) => format!("Error parsing filename: {}", err),
                 ExistingTcpdumpError => {
-                    format!("Error starting TCPDUMP: TCPDUMP is already started")
+                    "Error starting TCPDUMP: TCPDUMP is already started".to_string()
                 }
                 SpawnError(ref err) => format!("Error spawning TCPDUMP: {}", err),
-                StderrError => format!("Error reading TCPDUMP's stderr: stderr does not exist"),
+                StderrError => "Error reading TCPDUMP's stderr: stderr does not exist".to_string(),
                 InitialMessageError(ref err) => format!("Error reading TCPDUMP's stderr: {}", err),
                 SigtermError(ref err) => format!("Error terminating TCPDUMP: {}", err),
                 KillError(ref term_error, ref kill_error) => format!(
@@ -91,9 +91,9 @@ impl fmt::Display for TcpdumpError {
                     format!("Child exited with failure status code: {}", status)
                 }
                 NonexistingTcpdumpError => {
-                    format!("Error attempting to stop TCPDUMP: TCPDUMP is not started")
+                    "Error attempting to stop TCPDUMP: TCPDUMP is not started".to_string()
                 }
-                ShutdownError => format!("Shutting down"),
+                ShutdownError => "Shutting down".to_string(),
             }
         )
     }

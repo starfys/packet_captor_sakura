@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Steven Sheffey <srs6p@mtmail.mtsu.edu>"]
 license = "GPL-3.0-or-later"
 publish = false
+edition = "2018" 
 
 [dependencies]
 byteorder = "1.2.7"

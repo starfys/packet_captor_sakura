@@ -1,0 +1,19 @@
+name: Rust
+
+on:
+  push:
+    paths:
+      - 'data_generator'
+      - 'data_collection/url_queue'
+
+jobs:
+  build_data_generator:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: cargo build --verbose
+      working-directory: data_generator
+    - name: Run tests
+      run: cargo test --verbose
+      working-directory: data_generator

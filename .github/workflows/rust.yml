@@ -25,6 +25,7 @@ jobs:
       working-directory: data_collection/tcpdump_controller/tcpdump_controller
   build_data_generator:
     runs-on: ubuntu-latest
+    needs: build_url_queue
     steps:
     - uses: actions/checkout@v1
     - name: Build

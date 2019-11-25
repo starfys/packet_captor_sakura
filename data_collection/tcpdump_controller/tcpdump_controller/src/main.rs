@@ -117,7 +117,7 @@ fn handle_command(
             // Read the length of the filename
             // If we can't read command arguments, then the connection is in an
             // undetermined state, and tcpdump should be shut down just in case
-            let mut filename_length = match stream.read_u32::<LittleEndian>() {
+            let filename_length = match stream.read_u32::<LittleEndian>() {
                 Ok(filename_length) => filename_length,
                 Err(err) => {
                     // Shut down tcpdump if it exists

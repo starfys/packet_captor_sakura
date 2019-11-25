@@ -13,11 +13,11 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
-use serde::de::DeserializeOwned;
-use serde::Serialize;
+
+
 use std::error;
 use std::fs::{File, OpenOptions};
-use std::hash::Hash;
+
 use std::io::{self, BufWriter, Write};
 use std::iter::FromIterator;
 use std::marker::PhantomData;
@@ -25,8 +25,8 @@ use std::path::Path;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 
-use futures::sync::oneshot::{Receiver, Sender};
-use futures::{self, future, Stream};
+
+use futures::{future, Stream};
 use hyper::rt::Future;
 use hyper::service::{NewService, Service};
 use hyper::{Body, Method, Request, Response};
@@ -68,7 +68,7 @@ impl<'a> NewService for WorkQueueService<'a, CaptureWorkType, CaptureWork> {
     type InitError = io::Error;
 
     /// Type of Future to return
-    type Future = Box<'a + Future<Item = Self::Service, Error = Self::InitError> + Send>;
+    type Future = Box<dyn 'a + Future<Item = Self::Service, Error = Self::InitError> + Send>;
 
     /// This creates a new service instance
     fn new_service(&self) -> Self::Future {
@@ -90,7 +90,7 @@ impl<'a> Service for WorkQueueService<'a, CaptureWorkType, CaptureWork> {
     /// Type of error to return when requests fail
     type Error = io::Error;
     /// Type of Future to return
-    type Future = Box<'a + Future<Item = Response<Body>, Error = Self::Error> + Send>;
+    type Future = Box<dyn 'a + Future<Item = Response<Body>, Error = Self::Error> + Send>;
 
     /// This handles requests to the server
     ///
@@ -405,7 +405,7 @@ impl<'a> WorkQueueService<'a, CaptureWorkType, CaptureWork> {
 /// * `error` - The error to convert to `io::Error`
 fn as_io_error<E>(error: E) -> io::Error
 where
-    E: Into<Box<error::Error + Send + Sync>>,
+    E: Into<Box<dyn error::Error + Send + Sync>>,
 {
     io::Error::new(io::ErrorKind::Other, error)
 }

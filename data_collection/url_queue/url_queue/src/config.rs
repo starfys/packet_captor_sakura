@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
-use std::error;
+
 use std::fs::File;
 use std::io::{self, BufReader, Read};
 use std::net::SocketAddr;

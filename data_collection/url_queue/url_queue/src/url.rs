@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
 use csv;
-use std::collections::VecDeque;
-use std::fs::File;
-use std::io::{self, BufRead, BufReader};
-use std::iter::FusedIterator;
+
+
+use std::io::{self};
+
 use std::path::Path;
-use std::str::FromStr;
+
 
 /// Shorthand for an iterator that returns `UrlEntry`
-type UrlIterator = Box<Iterator<Item = UrlEntry> + Send>;
+type UrlIterator = Box<dyn Iterator<Item = UrlEntry> + Send>;
 
 /// A URL entry
 ///

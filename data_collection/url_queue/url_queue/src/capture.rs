@@ -18,7 +18,7 @@ use std::fmt;
 use std::io;
 use std::path::PathBuf;
 
-use futures::sync::oneshot::Receiver;
+
 use hex;
 use rand::{self, Rng};
 

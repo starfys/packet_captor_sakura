@@ -15,29 +15,27 @@
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
 
 
+use crate::capture::{CaptureWork, CaptureWorkType};
+use crate::shutdown;
+use crate::work::{
+    AddClientRequest, AddClientResponse, RemoveClientRequest, RemoveClientResponse, WorkQueue,
+    WorkReportRequest, WorkReportResponse, WorkRequest, WorkResponse,
+};
+use futures::{future, Stream};
+use hyper::rt::Future;
+use hyper::service::{NewService, Service};
+use hyper::{Body, Method, Request, Response};
+use log::{info, error};
+use serde_derive::{Deserialize, Serialize};
+use serde_json;
 use std::error;
 use std::fs::{File, OpenOptions};
-
 use std::io::{self, BufWriter, Write};
 use std::iter::FromIterator;
 use std::marker::PhantomData;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
-
-
-use futures::{future, Stream};
-use hyper::rt::Future;
-use hyper::service::{NewService, Service};
-use hyper::{Body, Method, Request, Response};
-use serde_json;
-
-use capture::{CaptureWork, CaptureWorkType};
-use shutdown;
-use work::{
-    AddClientRequest, AddClientResponse, RemoveClientRequest, RemoveClientResponse, WorkQueue,
-    WorkReportRequest, WorkReportResponse, WorkRequest, WorkResponse,
-};
 
 pub struct WorkQueueService<'a, T, W> {
     /// Handles clients and work

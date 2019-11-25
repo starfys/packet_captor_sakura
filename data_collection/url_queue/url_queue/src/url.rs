@@ -13,11 +13,11 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
+
+
 use csv;
-
-
+use serde_derive::{Deserialize, Serialize};
 use std::io::{self};
-
 use std::path::Path;
 
 

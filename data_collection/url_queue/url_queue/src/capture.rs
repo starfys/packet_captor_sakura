@@ -13,19 +13,18 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
+
+use crate::config::Config;
+use crate::service::WorkQueueService;
+use crate::shutdown;
+use crate::url::{UrlEntry, UrlsReader};
+use hex;
+use rand::{self, Rng};
+use serde_derive::{Deserialize, Serialize};
 use std::cmp::Ordering;
 use std::fmt;
 use std::io;
 use std::path::PathBuf;
-
-
-use hex;
-use rand::{self, Rng};
-
-use config::Config;
-use service::WorkQueueService;
-use shutdown;
-use url::{UrlEntry, UrlsReader};
 
 #[derive(Copy, Clone, Ord, Debug, Eq, Hash, PartialEq, PartialOrd, Deserialize, Serialize)]
 pub enum CaptureWorkType {

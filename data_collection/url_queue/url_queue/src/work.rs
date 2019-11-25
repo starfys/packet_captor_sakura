@@ -13,6 +13,8 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
+
+use serde_derive::{Deserialize, Serialize};
 use std::collections::{BinaryHeap, HashMap};
 use std::hash::Hash;
 use std::iter::FromIterator;

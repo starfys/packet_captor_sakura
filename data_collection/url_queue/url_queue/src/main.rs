@@ -15,25 +15,6 @@
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
 #![allow(unused_imports)]
 
-extern crate clap;
-extern crate csv;
-extern crate env_logger;
-#[macro_use]
-extern crate failure;
-extern crate futures;
-extern crate hex;
-extern crate http;
-extern crate hyper;
-#[macro_use]
-extern crate log;
-extern crate rand;
-extern crate serde;
-#[macro_use]
-extern crate serde_derive;
-#[macro_use]
-extern crate serde_json;
-extern crate toml;
-
 mod capture;
 mod config;
 mod service;
@@ -41,19 +22,19 @@ mod shutdown;
 mod url;
 mod work;
 
-use std::io;
-use std::iter::FromIterator;
-use std::sync::{Arc, Mutex};
 
 use clap::{App, Arg};
+use crate::capture::{CaptureWork, CaptureWorkType};
+use crate::service::WorkQueueService;
+use crate::url::UrlsReader;
 use hyper::header;
 use hyper::rt::Future;
 use hyper::service::service_fn;
 use hyper::{Body, Response, Server, StatusCode};
-
-use capture::{CaptureWork, CaptureWorkType};
-use service::WorkQueueService;
-use url::UrlsReader;
+use log::error;
+use std::io;
+use std::iter::FromIterator;
+use std::sync::{Arc, Mutex};
 
 fn main() -> Result<(), io::Error> {
     // Initiate logger

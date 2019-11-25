@@ -1,0 +1,12 @@
+name: Data Collection
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: make build
+      working-directory: data_collection

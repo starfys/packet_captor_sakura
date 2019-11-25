@@ -19,4 +19,4 @@ serde_derive = "1.0"
 serde_json = "1.0"
 tempdir = "0.3"
 
-url_queue = { path = "../url_queue/url_queue" }
+url_queue = { path = "../data_collection/url_queue/url_queue" }

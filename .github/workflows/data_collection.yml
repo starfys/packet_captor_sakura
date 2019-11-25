@@ -1,9 +1,6 @@
 name: Data Collection
 
-on:
-  push:
-    paths:
-    - 'data_collection/**'
+on: [push]
 
 jobs:
   build:

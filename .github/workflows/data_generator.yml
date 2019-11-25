@@ -3,7 +3,7 @@ name: Data Generator
 on: [push]
 
 jobs:
-  build_data_generator:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1

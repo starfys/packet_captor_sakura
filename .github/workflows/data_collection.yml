@@ -3,7 +3,7 @@ name: Data Collection
 on:
   push:
     paths:
-      - "data_collection"
+      - 'data_collection/**'
 
 jobs:
   build:

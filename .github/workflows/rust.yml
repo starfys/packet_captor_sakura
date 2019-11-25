@@ -3,13 +3,13 @@ name: Rust
 on: [push]
 
 jobs:
-  build:
-
+  build_url_queue:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Build
       run: cargo build --verbose
+      working-directory: data_collection/url_queue/url_queue
     - name: Run tests
       run: cargo test --verbose
+      working-directory: data_collection/url_queue/url_queue

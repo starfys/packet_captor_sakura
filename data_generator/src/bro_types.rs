@@ -16,6 +16,7 @@
 use failure;
 use pnet_packet::ip::IpNextHeaderProtocols::{Icmp, Tcp, Udp};
 use serde::{Deserialize, Deserializer};
+use serde_derive::Deserialize;
 use serde_json;
 
 use std::convert::From;

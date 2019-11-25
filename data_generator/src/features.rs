@@ -15,7 +15,7 @@
 // along with packet_captor_sakura.  If not, see <https:// www.gnu.org/licenses/>.
 use std::collections::HashSet;
 use std::ops;
-
+use serde_derive::Serialize;
 use crate::packet::*;
 
 /// Per-packet features

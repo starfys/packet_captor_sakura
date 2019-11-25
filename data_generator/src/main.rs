@@ -13,18 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with packet_captor_sakura.  If not, see <https:// www.gnu.org/licenses/>.
-extern crate byteorder;
-extern crate clap;
-extern crate env_logger;
-#[macro_use]
-extern crate failure;
-extern crate flate2;
-#[macro_use]
-extern crate log;
-#[macro_use]
-extern crate serde;
-#[macro_use]
-extern crate serde_derive;
 
 mod bro_types;
 mod dataset;
@@ -35,12 +23,10 @@ mod packet;
 mod pcap;
 
 use std::path::Path;
-
 use clap::{App, Arg};
-use failure::Error;
-use tempdir::TempDir;
-
-use dataset::*;
+use crate::dataset::*;
+use failure::{Error, format_err};
+use log::{error, info};
 
 fn run() -> Result<(), Error> {
     // Start the logger

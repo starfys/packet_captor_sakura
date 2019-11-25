@@ -13,7 +13,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with packet_captor_sakura.  If not, see <https:// www.gnu.org/licenses/>.
-use failure::Error;
+
+use crate::entropy::*;
+use crate::pcap::*;
+use failure::{Error, Fail};
 use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
 use pnet_packet::ip::IpNextHeaderProtocols;
 use pnet_packet::ipv4::Ipv4Packet;
@@ -21,12 +24,8 @@ use pnet_packet::ipv6::Ipv6Packet;
 use pnet_packet::tcp::TcpPacket;
 use pnet_packet::udp::UdpPacket;
 use pnet_packet::FromPacket;
-
 use std::net::IpAddr;
 use std::path::Path;
-
-use crate::entropy::*;
-use crate::pcap::*;
 
 #[derive(Debug)]
 /// Basic features extracted from a PCAP record

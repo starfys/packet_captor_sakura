@@ -13,28 +13,29 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with packet_captor_sakura.  If not, see <https:// www.gnu.org/licenses/>.
-use std::collections::HashMap;
-use std::fs::{self, File};
-use std::io::{BufRead, BufReader, BufWriter, Write};
-use std::path::{Path, PathBuf};
-use std::process::Command;
-
 use crate::bro_types::Connection;
 use crate::features::{
     DirectionInferenceMethod, FlowFeatures, NormalizedFlowFeatures, PacketFeatures,
 };
 use crate::flow_aggregator::FlowAggregator;
 use crate::packet::Packet;
-
-use failure::Error;
+use serde_derive::Serialize;
+use failure::{ensure, Error, format_err};
 use flate2::write::GzEncoder;
 use flate2::Compression;
 use itertools::Itertools;
+use log::info;
 use rayon::prelude::*;
+use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufRead, BufReader, BufWriter, Write};
+use std::path::{Path, PathBuf};
+use std::process::Command;
 use tempdir::TempDir;
-
 use url_queue::capture::{CaptureWork, CaptureWorkType};
 use url_queue::work::WorkReportRequest;
+
+
 
 pub struct Dataset {
     classes: HashMap<CaptureWorkType, Vec<FlowData>>,

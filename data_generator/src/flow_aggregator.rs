@@ -13,14 +13,15 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with packet_captor_sakura.  If not, see <https:// www.gnu.org/licenses/>.
+
+use crate::bro_types::Connection;
+use crate::packet::{Packet, StrippedPacket};
+use itertools::Itertools;
+use log::warn;
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::net::IpAddr;
 
-use itertools::Itertools;
-
-use crate::bro_types::Connection;
-use crate::packet::{Packet, StrippedPacket};
 
 /// Associates packets with flows
 pub struct FlowAggregator {

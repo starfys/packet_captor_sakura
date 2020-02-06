@@ -30,7 +30,7 @@ pkgs.mkShell rec {
     pythonPackages.matplotlib
     pythonPackages.numpy
     pythonPackages.pandas
-    pythonPackages.pytorchWithoutCuda
+    pythonPackages.pytorchWithCuda
     pythonPackages.ipywidgets
     pythonPackages.scikitlearn
     pythonPackages.scipy
@@ -41,7 +41,7 @@ pkgs.mkShell rec {
   kernels;
 
   shellHook = ''
-    # export CUDA_HOME="${pkgs.cudatoolkit}"
+    export CUDA_HOME="${pkgs.cudatoolkit}"
     TEMPDIR=$(mktemp -d -p /tmp)
     mkdir -p $TEMPDIR
     cp -r ${pythonPackages.jupyterlab}/share/jupyter/lab/* $TEMPDIR

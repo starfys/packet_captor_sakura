@@ -201,7 +201,7 @@ impl FlowData {
         );
         // Run BRO on the pcap file
         info!("Running bro on {:?}", pcap_path);
-        let bro_return = Command::new("bro")
+        let bro_return = Command::new("zeek")
             .current_dir(scratch_path)
             .arg("-b")
             .arg("-e")

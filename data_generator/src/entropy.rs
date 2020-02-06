@@ -26,7 +26,7 @@ impl ShannonEntropy for [u8] {
         }
         // Iterate over frequencies
         frequencies
-            .into_iter()
+            .iter()
             .map(|frequency| {
                 // Handle 0 values
                 if *frequency == 0 {

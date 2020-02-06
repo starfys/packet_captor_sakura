@@ -19,13 +19,13 @@ use crate::features::{
 };
 use crate::flow_aggregator::FlowAggregator;
 use crate::packet::Packet;
-use serde_derive::Serialize;
-use failure::{ensure, Error, format_err};
+use failure::{ensure, format_err, Error};
 use flate2::write::GzEncoder;
 use flate2::Compression;
 use itertools::Itertools;
 use log::info;
 use rayon::prelude::*;
+use serde_derive::Serialize;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
@@ -34,8 +34,6 @@ use std::process::Command;
 use tempdir::TempDir;
 use url_queue::capture::{CaptureWork, CaptureWorkType};
 use url_queue::work::WorkReportRequest;
-
-
 
 pub struct Dataset {
     classes: HashMap<CaptureWorkType, Vec<FlowData>>,

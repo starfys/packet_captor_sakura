@@ -22,7 +22,6 @@ use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::net::IpAddr;
 
-
 /// Associates packets with flows
 pub struct FlowAggregator {
     /// The main data structure is a mapping of ID to a set of packets

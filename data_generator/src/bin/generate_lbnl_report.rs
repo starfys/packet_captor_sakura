@@ -1,4 +1,4 @@
-use clap::{Arg, App, crate_version, crate_authors};
+use clap::{crate_authors, crate_version, App, Arg};
 use std::convert::TryInto;
 use std::fs::OpenOptions;
 use std::io::{BufWriter, Write};
@@ -17,14 +17,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .help("Path to the directory containing the LBNL packet dataset")
                 .value_name("DATASET_PATH")
                 .required(true)
-                .index(1)
+                .index(1),
         )
         .arg(
             Arg::with_name("include_scanners")
                 .takes_value(false)
                 .short("-s")
                 .long("--include-scanners")
-                .help("Whether to include data from scanners")
+                .help("Whether to include data from scanners"),
         )
         .get_matches();
     // Get dataset path
@@ -67,11 +67,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 work: CaptureWork {
                     index: idx,
                     url: "unknown".to_string(),
-                    filename: file_path
+                    filename: file_path,
                 },
                 type_index: idx,
                 start_time: 0,
-                finish_time: 0
+                finish_time: 0,
             };
             // Output the json
             serde_json::to_writer(&mut report_writer, &work)?;
@@ -80,5 +80,4 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     Ok(())
-
 }

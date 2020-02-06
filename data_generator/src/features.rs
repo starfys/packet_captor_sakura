@@ -13,10 +13,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with packet_captor_sakura.  If not, see <https:// www.gnu.org/licenses/>.
+use crate::packet::*;
+use serde_derive::Serialize;
 use std::collections::HashSet;
 use std::ops;
-use serde_derive::Serialize;
-use crate::packet::*;
 
 /// Per-packet features
 #[derive(Clone, Debug)]

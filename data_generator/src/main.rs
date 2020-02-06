@@ -22,11 +22,11 @@ mod flow_aggregator;
 mod packet;
 mod pcap;
 
-use std::path::Path;
-use clap::{App, Arg};
 use crate::dataset::*;
-use failure::{Error, format_err};
+use clap::{App, Arg};
+use failure::{format_err, Error};
 use log::{error, info};
+use std::path::Path;
 
 fn run() -> Result<(), Error> {
     // Start the logger

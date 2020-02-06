@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with url_queue.  If not, see <http://www.gnu.org/licenses/>.
 
-
 use crate::capture::{CaptureWork, CaptureWorkType};
 use crate::shutdown;
 use crate::work::{
@@ -25,7 +24,7 @@ use futures::{future, Stream};
 use hyper::rt::Future;
 use hyper::service::{NewService, Service};
 use hyper::{Body, Method, Request, Response};
-use log::{info, error};
+use log::{error, info};
 use serde_derive::{Deserialize, Serialize};
 use serde_json;
 use std::error;

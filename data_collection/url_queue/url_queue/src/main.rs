@@ -22,11 +22,10 @@ mod shutdown;
 mod url;
 mod work;
 
-
-use clap::{App, Arg};
 use crate::capture::{CaptureWork, CaptureWorkType};
 use crate::service::WorkQueueService;
 use crate::url::UrlsReader;
+use clap::{App, Arg};
 use hyper::header;
 use hyper::rt::Future;
 use hyper::service::service_fn;

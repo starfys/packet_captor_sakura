@@ -19,7 +19,7 @@ all: build
 CAPTURE_SERVICE=capture
 URL_SERVICE=url_queue
 
-CAPTURE_SCALE=5
+CAPTURE_SCALE=8
 
 build: build_tcpdump_controller
 	docker-compose build $(SERVICE_NAME)

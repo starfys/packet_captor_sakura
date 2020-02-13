@@ -19,13 +19,13 @@ use crate::features::{
 };
 use crate::flow_aggregator::FlowAggregator;
 use crate::packet::Packet;
-use failure::{ensure, format_err, Error};
+use serde_derive::Serialize;
+use failure::{ensure, Error, format_err};
 use flate2::write::GzEncoder;
 use flate2::Compression;
 use itertools::Itertools;
 use log::info;
 use rayon::prelude::*;
-use serde_derive::Serialize;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
@@ -34,6 +34,8 @@ use std::process::Command;
 use tempdir::TempDir;
 use url_queue::capture::{CaptureWork, CaptureWorkType};
 use url_queue::work::WorkReportRequest;
+
+
 
 pub struct Dataset {
     classes: HashMap<CaptureWorkType, Vec<FlowData>>,
@@ -70,8 +72,9 @@ impl Dataset {
             .filter(|report| report.success)
             // Load flow data from the PCAP for this work
             .flat_map(|report| FlowData::load(report, data_dir))
+            .flatten()
             // Separate out group type so we can aggregate
-            .map(|flow_data| (flow_data.class, flow_data))
+            .map(|flow_data| (flow_data.class, flow_data)) 
             // Collect into one big vector
             .collect::<Vec<_>>()
             // Convert to iterator for itertools
@@ -147,7 +150,7 @@ impl Dataset {
 #[derive(Debug)]
 pub struct FlowData {
     /// Class of data gathered in this pcap
-    class: CaptureWorkType,
+    pub class: CaptureWorkType,
     /// The URL that was requested that this flow was performed as part of
     url: String,
     /// Whether this pcap was the first of its class to be run on the worker
@@ -162,7 +165,7 @@ impl FlowData {
     pub fn load<P>(
         report: WorkReportRequest<CaptureWorkType, CaptureWork>,
         data_path: P,
-    ) -> Result<Self, Error>
+    ) -> Result<Vec<Self>, Error>
     where
         P: AsRef<Path>,
     {
@@ -258,7 +261,7 @@ impl FlowData {
         // Use the same periods for to_client
         let interarrival_to_client_bins = interarrival_from_client_bins.clone();
         // Extract the aggregated flows from the aggregator
-        let (num_flows, features) = flow_aggregator
+        let features = flow_aggregator
             .into_aggregated_flows()
             .into_iter()
             // Convert each flow's packets into features
@@ -273,25 +276,37 @@ impl FlowData {
                     &interarrival_from_client_bins,
                     &interarrival_to_client_bins,
                 )
-            })
+            });
             // Aggregate the many flows associated with a request into a single flow
-            .fold(
-                (
-                    0,
+        // Whether to aggregate flows
+        let aggregate = false;
+        let normalized_features: Box<dyn Iterator<Item=NormalizedFlowFeatures>> = if aggregate {
+            let agg = features
+                .fold(
                     FlowFeatures::empty(
                         payload_size_bins.len(),
                         interarrival_from_client_bins.len(),
                         interarrival_to_client_bins.len(),
                     ),
-                ),
-                |(count, flow_acc), flow| (0, flow_acc + flow),
-            );
-        Ok(FlowData {
-            class,
-            url: url.clone(),
-            is_first_of_class: type_index == 1,
-            features: features.normalize(),
-        })
+                    |flow_acc, flow| flow_acc + flow,
+                )
+                .normalize();
+            Box::new(vec![agg].into_iter())
+        }
+        else {
+            Box::new(features.map(FlowFeatures::normalize))
+        };
+        // Store metadata with features
+        let data = normalized_features
+            .map(|features| FlowData {
+                class,
+                url: url.clone(),
+                is_first_of_class: type_index == 1,
+                features
+            })
+            .collect();
+        
+        Ok(data)
     }
 }
 

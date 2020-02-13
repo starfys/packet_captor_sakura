@@ -19,13 +19,13 @@ use crate::features::{
 };
 use crate::flow_aggregator::FlowAggregator;
 use crate::packet::Packet;
-use serde_derive::Serialize;
-use failure::{ensure, Error, format_err};
+use failure::{ensure, format_err, Error};
 use flate2::write::GzEncoder;
 use flate2::Compression;
 use itertools::Itertools;
 use log::info;
 use rayon::prelude::*;
+use serde_derive::Serialize;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
@@ -34,8 +34,6 @@ use std::process::Command;
 use tempdir::TempDir;
 use url_queue::capture::{CaptureWork, CaptureWorkType};
 use url_queue::work::WorkReportRequest;
-
-
 
 pub struct Dataset {
     classes: HashMap<CaptureWorkType, Vec<FlowData>>,
@@ -74,7 +72,7 @@ impl Dataset {
             .flat_map(|report| FlowData::load(report, data_dir))
             .flatten()
             // Separate out group type so we can aggregate
-            .map(|flow_data| (flow_data.class, flow_data)) 
+            .map(|flow_data| (flow_data.class, flow_data))
             // Collect into one big vector
             .collect::<Vec<_>>()
             // Convert to iterator for itertools
@@ -277,10 +275,10 @@ impl FlowData {
                     &interarrival_to_client_bins,
                 )
             });
-            // Aggregate the many flows associated with a request into a single flow
+        // Aggregate the many flows associated with a request into a single flow
         // Whether to aggregate flows
         let aggregate = false;
-        let normalized_features: Box<dyn Iterator<Item=NormalizedFlowFeatures>> = if aggregate {
+        let normalized_features: Box<dyn Iterator<Item = NormalizedFlowFeatures>> = if aggregate {
             let agg = features
                 .fold(
                     FlowFeatures::empty(
@@ -292,8 +290,7 @@ impl FlowData {
                 )
                 .normalize();
             Box::new(vec![agg].into_iter())
-        }
-        else {
+        } else {
             Box::new(features.map(FlowFeatures::normalize))
         };
         // Store metadata with features
@@ -302,10 +299,10 @@ impl FlowData {
                 class,
                 url: url.clone(),
                 is_first_of_class: type_index == 1,
-                features
+                features,
             })
             .collect();
-        
+
         Ok(data)
     }
 }

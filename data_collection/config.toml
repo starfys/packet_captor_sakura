@@ -18,9 +18,9 @@ page = 5
 element = 55
 
 [tor]
-bridge = "meek 0.0.2.0:3 97700DFE9F483596DDA6264C4D7DF7641E1E39CE url=https://meek.azureedge.net/ front=ajax.aspnetcdn.com"
+bridge = "meek_lite 0.0.2.0:2 97700DFE9F483596DDA6264C4D7DF7641E1E39CE url=https://meek.azureedge.net/ front=ajax.aspnetcdn.com"
 port = 9050
 log_path = "/tmp/tor_error.log"
 [tor.timeout]
-initial = 600
+initial = 1200
 regular = 60

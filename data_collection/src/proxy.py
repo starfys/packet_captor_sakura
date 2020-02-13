@@ -36,16 +36,15 @@ class Proxy():
         meek_client_path = tor_path / "PluggableTransports" / "meek-client"
         # Meek client helper
         meek_client_tb_path = tor_path / "PluggableTransports" / "meek-client-torbrowser"
+        # Obfsproxy path
+        obfsproxy_path = tor_path / "PluggableTransports" / "obfs4proxy"
         # Set the bridge
         # Build the config
         self.tor_config = {
-            "UseBridges":
-            "1",
+            "UseBridges": "1",
             "ClientTransportPlugin":
-            "meek exec {} --log helper.log -- {} --log meek.log".format(
-                meek_client_tb_path.absolute(), meek_client_path.absolute()),
-            "Bridge":
-            tor_config["bridge"],
+            "meek_lite exec {}".format(obfsproxy_path.absolute()),
+            "Bridge": tor_config["bridge"],
             'Log': [
                 'NOTICE stdout',
                 'ERR file {}'.format(tor_config["log_path"]),

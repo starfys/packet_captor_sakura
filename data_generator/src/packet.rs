@@ -69,12 +69,10 @@ pub enum ParsePacketError {
 impl Packet {
     pub fn load_from_pcap(pcap_path: &Path) -> Result<impl Iterator<Item = Self>, Error> {
         // Open the pcap file
-        let pcap_reader = PcapReader::open(pcap_path).expect("Failed to initialize Pcap reader");
-        // Extract whether the pcap is nanosecond resolution
-        let is_nanosecond_res: bool = pcap_reader.is_nanosecond_res;
+        let pcap_reader = PcapReader2::open(pcap_path).expect("Failed to initialize Pcap reader");
+        //let is_nanosecond_res = pcap_reader.is_nanosecond_res;
         // Iterate over the pcap records
-        let packets =
-            pcap_reader.flat_map(move |record| Self::from_record(record, is_nanosecond_res));
+        let packets = pcap_reader.flat_map(move |record| Self::from_record(record, false));
         Ok(packets)
     }
 

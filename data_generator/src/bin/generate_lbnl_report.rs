@@ -58,7 +58,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Check the filename
         let file_path = dir_entry.path();
         let extension = file_path.extension().unwrap();
-        if extension == "anon" || (extension == "anon-scanners" && include_scanners) {
+        if extension == "anon"
+            || extension == "pcap"
+            || (extension == "anon-scanners" && include_scanners)
+        {
             let idx: u64 = idx.try_into().unwrap();
             // Construct a report
             let work = WorkReportRequest {
@@ -67,7 +70,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 work: CaptureWork {
                     index: idx,
                     url: "unknown".to_string(),
-                    filename: file_path,
+                    filename: file_path.strip_prefix(&dataset_path).unwrap().to_path_buf(),
                 },
                 type_index: idx,
                 start_time: 0,

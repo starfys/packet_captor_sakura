@@ -227,7 +227,7 @@ impl FlowData {
         scratch_dir.close()?;
         // Read in packets from the pcap
         info!("Loading packets from {:?}", pcap_path);
-        let packets = Packet::load_from_pcap(&pcap_path)?
+        let packets: Vec<_> = Packet::load_from_pcap(&pcap_path)?
             .filter(|packet| packet.src_port == 443 || packet.dst_port == 443)
             .collect();
         // Aggregate the connection log and pcap

@@ -12,6 +12,7 @@ failure = "0.1"
 flate2 = "1.0"
 itertools = "0.8"
 log = "0.4"
+pcap-parser = { version = "0.8", features = [ "data" ] }
 pnet_packet = "0.23"
 rayon = "1.0"
 serde = "1.0" 

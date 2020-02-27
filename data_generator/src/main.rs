@@ -23,7 +23,7 @@ mod packet;
 mod pcap;
 
 use crate::dataset::*;
-use clap::{App, Arg};
+use clap::{crate_authors, crate_description, crate_name, crate_version, App, Arg};
 use failure::{format_err, Error};
 use log::{error, info};
 use std::path::Path;
@@ -32,10 +32,10 @@ fn run() -> Result<(), Error> {
     // Start the logger
     drop(env_logger::init());
     // Parse command line arguments
-    let matches = App::new("Feature extractor")
-        .version("1.0")
-        .author("name <email@example.com>")
-        .about("Extracts useful features from PCAPs")
+    let matches = App::new(crate_name!())
+        .version(crate_version!())
+        .author(crate_authors!())
+        .about(crate_description!())
         .arg(
             Arg::with_name("data_dir")
                 .value_name("DATA_DIR")

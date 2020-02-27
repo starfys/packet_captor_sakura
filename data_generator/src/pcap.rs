@@ -13,16 +13,16 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with packet_captor_sakura.  If not, see <https:// www.gnu.org/licenses/>.
-use byteorder::{BigEndian, LittleEndian, NativeEndian, ReadBytesExt};
+
 use pcap_parser::traits::PcapReaderIterator;
 use pcap_parser::Linktype;
 use std::convert::TryInto;
 use std::fs::File;
-use std::io;
+
 use std::io::prelude::*;
 use std::io::BufReader;
 use std::path::Path;
-use std::time::Duration;
+
 
 pub struct PcapReader2<R> {
     reader: Box<dyn PcapReaderIterator<R>>,
@@ -44,7 +44,7 @@ where
     R: Read,
 {
     //TODO: return result
-    pub fn from_reader(mut rdr: R) -> Result<Self, pcap_parser::PcapError> {
+    pub fn from_reader(rdr: R) -> Result<Self, pcap_parser::PcapError> {
         let mut reader = pcap_parser::create_reader(2 << 20, rdr)?;
         if let Ok((offset, pcap_parser::PcapBlockOwned::LegacyHeader(header))) = reader.next() {
             reader.consume(offset);
@@ -90,11 +90,11 @@ where
                             self.reader.consume(offset);
                             return Some(PcapRecord { header, data });
                         }
-                        NG(block) => {
+                        NG(_block) => {
                             println!("PCAPNGBLOCK");
                             self.reader.consume(offset);
                         }
-                        LegacyHeader(header) => {
+                        LegacyHeader(_header) => {
                             self.reader.consume(offset);
                         }
                     };
